@@ -1,8 +1,5 @@
-filter:
-    excluded_paths:
-        - 'app/webroot'
 checks:
-    php: true
+    php:
         sql_injection_vulnerabilities: true
         return_in_constructor: true
         require_php_tag_first: true
@@ -22,5 +19,8 @@ checks:
         return_doc_comment_if_not_inferrable: true
         no_long_variable_names:
             maximum: '20'
+filter:
+    excluded_paths:
+        - 'app/webroot'
 coding_style:
     php: {  }
