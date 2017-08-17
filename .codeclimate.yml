@@ -26,4 +26,6 @@ ratings:
   - "**.php"
   - "**.py"
   - "**.rb"
-exclude_paths: []
+  - "**.ctp"
+exclude_paths:
+  - app/webroot
