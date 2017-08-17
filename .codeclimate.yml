@@ -25,6 +25,10 @@ engines:
     enabled: true
     config:
       file_extensions: "php,inc,ctp"
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,inc,ctp"
 ratings:
   paths:
   - "**.css"
