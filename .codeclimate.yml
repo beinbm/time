@@ -16,6 +16,11 @@ engines:
     enabled: true
   phpmd:
     enabled: true
+    config:
+      file_extensions: 
+        - php
+        - inc
+	- ctp
 ratings:
   paths:
   - "**.css"
