@@ -1,0 +1,7 @@
+filter:
+    excluded_paths:
+        - 'app/webroot'
+checks:
+    php: true
+coding_style:
+    php: {  }
