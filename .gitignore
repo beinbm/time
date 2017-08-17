@@ -7,3 +7,4 @@ app/[Cc]onfig/email.php
 atlassian-ide-plugin.xml
 vendor
 composer.lock
+.DS_Store

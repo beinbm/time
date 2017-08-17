@@ -17,10 +17,14 @@ engines:
   phpmd:
     enabled: true
     config:
-      file_extensions: 
+      file_extensions:
         - php
         - inc
-	- ctp
+        - ctp
+  phan:
+    enabled: true
+    config:
+      file_extensions: "php,inc,ctp"
 ratings:
   paths:
   - "**.css"
