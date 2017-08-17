@@ -1,4 +1,6 @@
-# Timetracking Tool
+# time tracking tool
+
+## !! Don't use this app in production! Its code base is only used to test different tools to measure code quality and identify problems
 
 ## install
 * database_schema.sql needs a database
