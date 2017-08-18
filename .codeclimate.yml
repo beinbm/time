@@ -21,6 +21,9 @@ engines:
         - php
         - inc
         - ctp
+    checks:
+      Controversial/CamelCasePropertyName:
+        enabled: false
   phan:
     enabled: true
     config:
@@ -31,6 +34,8 @@ engines:
       file_extensions: "php,inc,ctp"
     checks:
       Generic WhiteSpace DisallowTabIndent TabsUsed:
+        enabled: false
+      PSR1 Classes ClassDeclaration MissingNamespace:
         enabled: false
 ratings:
   paths:
