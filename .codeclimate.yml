@@ -29,6 +29,9 @@ engines:
     enabled: true
     config:
       file_extensions: "php,inc,ctp"
+    checks:
+      Generic WhiteSpace DisallowTabIndent TabsUsed:
+        enabled: false
 ratings:
   paths:
   - "**.css"
