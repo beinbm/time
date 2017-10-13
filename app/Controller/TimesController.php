@@ -253,6 +253,408 @@ class TimesController extends AppController {
 
 		$this->set('times', $this->Time->findAll("Customer.id = $customer", null, 'start DESC', intval($count)));
 	}
+
+
+    function verylongfunction($id = null) {
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+        if (empty($this->request->data)) {
+            if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
+                $this->Session->setFlash('Invalid id for Time', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if (!$this->Time->hasAny("Time.id = $id AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) ")) {
+                $this->Session->setFlash('Entry too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            $this->request->data = $this->Time->find(
+                'first',
+                array('conditions' => "Time.id = $id AND Time.user_id = $this->userid")
+            );
+
+        } elseif ($this->Time->hasAny(
+            "Time.id = $id AND Time.user_id = $this->userid AND Time.start > DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY) "
+        )
+        ) {
+            // Only own ids
+            $this->request->data['Time']['id'] = $id;
+            $this->request->data['Time']['user_id'] = $this->userid;
+
+            if (strtotime($this->request->data['Time']['start']) - strtotime('-5 days') < 0) {
+                $this->Session->setFlash('Entry gets too old', 'message_error');
+                $this->redirect('/times/index');
+                exit();
+            }
+            if ($this->Time->save($this->request->data)) {
+                $this->Session->setFlash('The Time has been saved', 'message_ok');
+                $this->redirect('/times/index');
+            } else {
+                $this->Session->setFlash('Please correct errors below.', 'message_error');
+            }
+        }
+
+        $this->set('customers', $this->Time->Customer->find('list'));
+
+
+    }
 }
 
 ?>
