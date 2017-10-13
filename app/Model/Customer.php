@@ -1,7 +1,8 @@
 <?php
 
-class Customer extends AppModel {
-	var $name = 'Customer';
-	var $displayField = 'name';
+class Customer extends AppModel
+{
+    var $name = 'Customer';
+    var $displayField = 'name';
 
 }

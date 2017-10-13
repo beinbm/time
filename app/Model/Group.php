@@ -1,7 +1,8 @@
 <?php
 
-class Group extends AppModel {
-	var $name = 'Group';
-	var $displayField = 'name';
+class Group extends AppModel
+{
+    var $name = 'Group';
+    var $displayField = 'name';
 
 }

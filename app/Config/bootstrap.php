@@ -161,11 +161,11 @@ Cache::config('default', array('engine' => 'File'));
  * ));
  */
 Configure::write(
-	'Dispatcher.filters',
-	array(
-		'AssetDispatcher',
-		'CacheDispatcher'
-	)
+    'Dispatcher.filters',
+    array(
+        'AssetDispatcher',
+        'CacheDispatcher'
+    )
 );
 
 /**
@@ -173,20 +173,20 @@ Configure::write(
  */
 App::uses('CakeLog', 'Log');
 CakeLog::config(
-	'debug',
-	array(
-		'engine' => 'FileLog',
-		'types' => array('notice', 'info', 'debug'),
-		'file' => 'debug',
-	)
+    'debug',
+    array(
+        'engine' => 'FileLog',
+        'types' => array('notice', 'info', 'debug'),
+        'file' => 'debug',
+    )
 );
 CakeLog::config(
-	'error',
-	array(
-		'engine' => 'FileLog',
-		'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-		'file' => 'error',
-	)
+    'error',
+    array(
+        'engine' => 'FileLog',
+        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+        'file' => 'error',
+    )
 );
 
 
@@ -194,24 +194,27 @@ CakeLog::config(
  * Debugging Hilfsfunktionen
  */
 App::import('Utility', 'Debugger');
-function prd($data) {
-	pr($data);
-	die();
+function prd($data)
+{
+    pr($data);
+    die();
 }
 
-function vd($var) {
-	if (Configure::read('debug') > 0) {
-		echo '<pre>';
-		echo var_dump($var);
-		echo '</pre>';
-	}
+function vd($var)
+{
+    if (Configure::read('debug') > 0) {
+        echo '<pre>';
+        echo var_dump($var);
+        echo '</pre>';
+    }
 }
 
-function vdd($var) {
-	if (Configure::read('debug') > 0) {
-		echo '<pre>';
-		echo var_dump($var);
-		echo '</pre>';
-		die();
-	}
+function vdd($var)
+{
+    if (Configure::read('debug') > 0) {
+        echo '<pre>';
+        echo var_dump($var);
+        echo '</pre>';
+        die();
+    }
 }

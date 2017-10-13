@@ -31,35 +31,37 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
-	var $uses = Array('User');
+class AppController extends Controller
+{
+    var $uses = Array('User');
 
-	function beforeFilter() {
-		if (env("REMOTE_USER")) {
-			$this->curr_user = $this->User->findByName(env("REMOTE_USER"));
-			if ($this->curr_user) {
-				$this->userid = $this->curr_user['User']['id'];
-				$this->groupid = $this->curr_user['Group']['id'];
+    function beforeFilter()
+    {
+        if (env("REMOTE_USER")) {
+            $this->curr_user = $this->User->findByName(env("REMOTE_USER"));
+            if ($this->curr_user) {
+                $this->userid = $this->curr_user['User']['id'];
+                $this->groupid = $this->curr_user['Group']['id'];
 
-				$this->set('curr_user', $this->curr_user);
-				$this->set('userid', $this->userid);
-				$this->set('groupid', $this->groupid);
-			} else {
-				// Create User if not present yet
-				$this->User->create();
-				$this->User->save(
-					array(
-						'User' => array(
-							'name' => env("REMOTE_USER"),
-							'group_id' => 0,
-						),
-						false
-					)
-				);
-				$this->redirect(array('controller' => 'times', 'action' => 'index'));
-			}
-		} else {
-			die('No User auth');
-		}
-	}
+                $this->set('curr_user', $this->curr_user);
+                $this->set('userid', $this->userid);
+                $this->set('groupid', $this->groupid);
+            } else {
+                // Create User if not present yet
+                $this->User->create();
+                $this->User->save(
+                    array(
+                        'User' => array(
+                            'name' => env("REMOTE_USER"),
+                            'group_id' => 0,
+                        ),
+                        false
+                    )
+                );
+                $this->redirect(array('controller' => 'times', 'action' => 'index'));
+            }
+        } else {
+            die('No User auth');
+        }
+    }
 }
