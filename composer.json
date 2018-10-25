@@ -17,9 +17,7 @@
 		"cakephp/cakephp": "2.*",
 		"vlucas/phpdotenv": "^2.5"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "3.7.*"
-	},
+	"require-dev": {},
 	"config": {
 		"vendor-dir": "Vendor",
 		"process-timeout": 6000
