@@ -49,4 +49,4 @@ ratings:
   - "**.rb"
   - "**.ctp"
 exclude_paths:
-  - app/webroot
+  - webroot

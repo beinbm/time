@@ -21,6 +21,6 @@ checks:
             maximum: '20'
 filter:
     excluded_paths:
-        - 'app/webroot'
+        - 'webroot'
 coding_style:
     php: {  }
