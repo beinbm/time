@@ -22,17 +22,14 @@
 App::uses('Controller', 'Controller');
 
 /**
- * Application Controller
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @property User $User
  */
 class AppController extends Controller
 {
 
-	public $curr_user = null;
+	protected $curr_user = null;
+	protected $userid = null;
+	protected $groupid = null;
 
 	public function beforeFilter()
 	{

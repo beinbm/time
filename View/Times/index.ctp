@@ -173,4 +173,7 @@ if (!isset($startedTime)) {
 	</div>
 </div>
 
+
+<?php echo $this->Html->link('Export', ['action' => 'export'], ['class' => 'btn']); ?>
+
 <?php // echo $this->element('stats'); ?>

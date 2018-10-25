@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class User
+ *
+ * @property Group $Group
+ * @property Payment $Payment
+ */
 class User extends AppModel
 {
 

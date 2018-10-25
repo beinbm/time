@@ -1,6 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 
+/**
+ * Class Payment
+ *
+ * @property User $User
+ */
 class Payment extends AppModel
 {
 

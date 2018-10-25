@@ -16,8 +16,8 @@ class TimesController extends AppController
 
 	public function index($count = 30)
 	{
-
 		$this->Time->recursive = 0;
+
 		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
 		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
 			$this->set('startedTime', 1);
@@ -26,6 +26,7 @@ class TimesController extends AppController
 				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL"]
 			);
 		}
+
 		$customers = $this->Time->Customer->find('list');
 		$users = $this->User->find('list');
 
@@ -82,54 +83,6 @@ class TimesController extends AppController
 		$this->set('users', $users);
 		$this->set('times', $times);
 		$this->set('statistics', $statistics);
-	}
-
-	public function index_customer($customer, $count = 30)
-	{
-		$this->Time->recursive = 0;
-		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
-			$this->set('startedTime', 1);
-			$this->request->data = $this->Time->find(
-				'first',
-				['conditions' => "User.id = '" . $this->userid . "' AND Time.stop IS NULL"]
-			);
-		}
-		$this->set('customers', $this->Time->Customer->find('list'));
-
-		if ($this->groupid == 1) {
-			$this->set(
-				'times',
-				$this->Time->find(
-					'all',
-					[
-						'conditions' => [
-							'Customer.id' => $customer,
-						],
-						'order' => 'start DESC',
-						'limit' => intval($count)
-					]
-				)
-			);
-		} else {
-			$this->set(
-				'times',
-				$this->Time->find(
-					'all',
-					[
-						'conditions' => [
-							'Customer.id' => $customer,
-							'Time.user_id' => $this->userid,
-						],
-						'order' => 'start DESC',
-						'limit' => intval($count)
-					]
-				)
-			);
-		}
-
-		$this->set('projectstatistics', $this->Time->projectstatistics($customer));
-		$this->set('monthly_stats', $this->Time->monthly_stats($customer));
 	}
 
 	public function start()
@@ -232,36 +185,28 @@ class TimesController extends AppController
 
 	public function export($count = 100, $user = null)
 	{
-		$this->layout = 'plain';
+		$this->layout = 'ajax';
 		$this->Time->recursive = 0;
-		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
-			$this->set('startedTime', 1);
-			$this->request->data = $this->Time->find(
-				'first',
-				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL"]
-			);
-		}
+
+		$this->response->download("time_export_".date('Ymd').".csv");
+
 		$this->set('customers', $this->Time->Customer->find('list'));
 
 		if ($this->groupid == 1 && $user == null) {
-			$this->set('times', $this->Time->findAll(null, null, 'start DESC', intval($count)));
-		} elseif ($this->groupid == 1 && $user != null) {
-			$this->set('times', $this->Time->findAll("Time.user_id = $user", null, 'start DESC', intval($count)));
+			$conditions = [];
+		} elseif ($this->groupid == 1 && !empty($user)) {
+			$conditions = ['Time.user_id' => $user];
 		} else {
-			$this->set(
-				'times',
-				$this->Time->findAll("Time.user_id = $this->userid", null, 'start DESC', intval($count))
-			);
+			$conditions = ['Time.user_id' => $this->userid];
 		}
 
-	}
+		$params = [
+			'conditions' => $conditions,
+			'limit' => intval($count),
+			'order' => ['Time.start' => 'DESC'],
+		];
 
-	public function export_customer($customer)
-	{
-		$this->layout = 'plain';
-		$this->Time->recursive = 0;
-
-		$this->set('times', $this->Time->findAll("Customer.id = $customer", null, 'start DESC', intval($count)));
+		$times = $this->Time->find('all', $params);
+		$this->set('times',$times);
 	}
 }

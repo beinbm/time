@@ -10,7 +10,7 @@ foreach ($times as $time) {
 	$line .= $time['Time']['stop'] . ';';
 	$line .= str_replace('.', ',', $time['Time']['break']) . ';'; //punkt nach komma wegen excel
 
-	if ($time['Time']['stop'] == '0000-00-00 00:00:00') {
+	if (empty($time['Time']['stop'])) {
 		$time['Time']['stop'] = date('Y-m-d H:i:s');
 	}
 	$time['Time']['startsec'] = strtotime($time['Time']['start']);
@@ -22,4 +22,3 @@ foreach ($times as $time) {
 
 	echo str_replace(["\r\n", "\r", "\n"], '', $line) . "\n";
 }
-?>

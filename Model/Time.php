@@ -1,6 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 
+/**
+ * Class Time
+ *
+ * @property User $User
+ * @property Customer $Customer
+ */
 class Time extends AppModel
 {
 
