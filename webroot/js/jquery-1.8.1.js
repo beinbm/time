@@ -2311,7 +2311,7 @@
 
                 if (value === null) {
                     jQuery.removeAttr(elem, name);
-                    return;
+
 
                 } else if (hooks && "set" in hooks && notxml && (ret = hooks.set(elem, value, name)) !== undefined) {
                     return ret;
@@ -5004,7 +5004,7 @@
                     if (Expr.order.test(type)) {
                         elements = Expr.find[ type ](token.captures[0].replace(rbackslash, ""), findContext, xml);
                         if (elements == null) {
-                            continue;
+
                         } else {
                             selector = selector.slice(0, selector.length - lastToken.length) +
                                 lastToken.replace(matchExpr[ type ], "");

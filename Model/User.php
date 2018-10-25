@@ -1,6 +1,7 @@
 <?php
 
-class User extends AppModel {
+class User extends AppModel
+{
 
 	public $displayField = 'name';
 

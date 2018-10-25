@@ -59,25 +59,22 @@
  */
 class DATABASE_CONFIG {
 
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+	public $default = [];
+	public $test = [];
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+	public function __construct()
+	{
+		$this->default = $this->test = array(
+			'datasource' => 'Database/Mysql',
+			'persistent' => false,
+			'host' => getenv('DB_HOST'),
+			'login' => getenv('DB_USERNAME'),
+			'password' => getenv('DB_PASSWORD'),
+			'database' => getenv('DB_DATABASE'),
+			'prefix' => 'solutica_',
+			'encoding' => 'utf8',
+		);
+
+		$this->test['prefix'] = 'solutica_testing_';
+	}
 }

@@ -47,7 +47,7 @@
 				'div' => false,
 				'class' => 'btn btn-success pull-right',
 			]
-		);    ?>
+		); ?>
 
 	</div>
 </div>

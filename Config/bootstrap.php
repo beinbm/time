@@ -20,6 +20,16 @@
  * @since         CakePHP(tm) v 0.10.8.2117
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+// Load composer autoload.
+$composerAutoloader = require APP . '/Vendor/autoload.php';
+
+// Remove and re-prepend CakePHP's autoloader as composer thinks it is the most important.
+// See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
+spl_autoload_unregister(array('App', 'load'));
+spl_autoload_register(array('App', 'load'), true, true);
+
+$dotenv = new Dotenv\Dotenv(APP);
+$dotenv->load();
 
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', ['engine' => 'File']);
@@ -98,9 +108,6 @@ Configure::write('Dispatcher.filters', [
 	'AssetDispatcher',
 	'CacheDispatcher'
 ]);
-
-Configure::load('configs');
-Configure::load('configs_private');
 
 /**
  * Configures default file logging options

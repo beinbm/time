@@ -1,0 +1,23 @@
+app:
+  image: beinbm/php:7.2-apache
+  volumes:
+    - ./:/var/www/html/public
+  links:
+    - db
+  ports:
+    - "8010:80"
+  environment:
+    DB_CONNECTION: mysql
+    DB_HOST: db
+    DB_DATABASE: time
+    DB_USERNAME: time
+    DB_PASSWORD: secret
+db:
+  image: mysql:5
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: time
+    MYSQL_USER: time
+    MYSQL_PASSWORD: secret

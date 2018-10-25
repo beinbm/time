@@ -29,18 +29,13 @@ App::uses('Controller', 'Controller');
  *
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller
+{
 
 	public $curr_user = null;
 
-	public function constructClasses() {
-		if (CakePlugin::loaded('DebugKit')) {
-			$this->components['DebugKit.Toolbar'] =  [];
-		}
-		parent::constructClasses();
-	}
-
-	public function beforeFilter() {
+	public function beforeFilter()
+	{
 		if (!env("REMOTE_USER")) {
 			throw new NotFoundException('No User auth');
 		}

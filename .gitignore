@@ -1,6 +1,4 @@
 tmp/*
-Config/database.php
-Config/email.php
 Plugin/*
 !empty
 .idea
@@ -8,3 +6,4 @@ atlassian-ide-plugin.xml
 vendor/*
 composer.lock
 /Config/configs_private.php
+.env

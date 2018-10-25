@@ -1,11 +1,13 @@
 <?php
 
-class PaymentsController extends AppController {
+class PaymentsController extends AppController
+{
 
 
 	public $helpers = ['Html', 'Form'];
 
-	public function beforeFilter() {
+	public function beforeFilter()
+	{
 		parent::beforeFilter();
 		if ($this->groupid != 1) {
 			return $this->flash('You are not allowed to use this function', '/times/index');
@@ -13,7 +15,8 @@ class PaymentsController extends AppController {
 		}
 	}
 
-	public function index() {
+	public function index()
+	{
 		$this->Payment->recursive = 0;
 		$this->set('Payments', $this->Payment->find('all'));
 
@@ -25,14 +28,16 @@ class PaymentsController extends AppController {
 		$this->set('statistics', $statistics);
 	}
 
-	public function view($id = null) {
+	public function view($id = null)
+	{
 		if (!$id) {
 			return $this->flash('Invalid id for Payment', '/payments/index');
 		}
 		$this->set('Payment', $this->Payment->findById($id));
 	}
 
-	public function add() {
+	public function add()
+	{
 		if (empty($this->request->data)) {
 			$this->set('Users', $this->Payment->User->find('list'));
 			$this->render();

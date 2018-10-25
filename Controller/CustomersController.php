@@ -1,29 +1,34 @@
 <?php
 
-class CustomersController extends AppController {
+class CustomersController extends AppController
+{
 
 	public $helpers = ['Html', 'Form'];
 
-	public function beforeFilter() {
+	public function beforeFilter()
+	{
 		parent::beforeFilter();
 		if ($this->groupid != 1) {
 			return $this->flash('You are not allowed to use this function', '/times/index');
 		}
 	}
 
-	public function index() {
+	public function index()
+	{
 		$this->Customer->recursive = 0;
 		$this->set('Customers', $this->Customer->find('all'));
 	}
 
-	public function view($id = null) {
+	public function view($id = null)
+	{
 		if (!$id) {
 			return $this->flash('Invalid id for Customer', '/Customers/index');
 		}
 		$this->set('Customer', $this->Customer->findById($id));
 	}
 
-	public function add() {
+	public function add()
+	{
 		if (empty($this->request->data)) {
 			$this->render();
 		} else {
@@ -35,7 +40,8 @@ class CustomersController extends AppController {
 		}
 	}
 
-	public function edit($id = null) {
+	public function edit($id = null)
+	{
 		if (empty($this->request->data)) {
 			if (!$id) {
 				return $this->flash('Invalid id for Customer', '/Customers/index');
@@ -50,7 +56,8 @@ class CustomersController extends AppController {
 		}
 	}
 
-	public function delete($id = null) {
+	public function delete($id = null)
+	{
 		if (!$id) {
 			return $this->flash('Invalid id for Customer', '/Customers/index');
 		}

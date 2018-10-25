@@ -30,8 +30,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-$debug = env('REMOTE_ADDR') === '127.0.0.1';
-Configure::write('debug', $debug ? 2 : 0);
+Configure::write('debug', getenv('APP_DEBUG'));
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
@@ -223,12 +222,12 @@ Configure::write('debug', $debug ? 2 : 0);
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+	Configure::write('Security.salt', getenv('APP_SALT'));
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '76859309657453542496749683645');
+	Configure::write('Security.cipherSeed', getenv('APP_SEED'));
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

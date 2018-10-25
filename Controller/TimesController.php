@@ -1,20 +1,29 @@
 <?php
 
-class TimesController extends AppController {
+/**
+ * Class TimesController
+ *
+ * @property Time $Time
+ * @property Payment $Payment
+ * @property User $User
+ */
+class TimesController extends AppController
+{
 
 
 	public $helpers = ['Html', 'Form'];
 	public $uses = ['Time', 'Payment', 'User'];
 
-	public function index($count = 30) {
+	public function index($count = 30)
+	{
 
 		$this->Time->recursive = 0;
 		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'")) {
+		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
 			$this->set('startedTime', 1);
 			$this->request->data = $this->Time->find(
 				'first',
-				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'"]
+				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL"]
 			);
 		}
 		$customers = $this->Time->Customer->find('list');
@@ -75,14 +84,15 @@ class TimesController extends AppController {
 		$this->set('statistics', $statistics);
 	}
 
-	public function index_customer($customer, $count = 30) {
+	public function index_customer($customer, $count = 30)
+	{
 		$this->Time->recursive = 0;
 		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'")) {
+		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
 			$this->set('startedTime', 1);
 			$this->request->data = $this->Time->find(
 				'first',
-				['conditions' => "User.id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'"]
+				['conditions' => "User.id = '" . $this->userid . "' AND Time.stop IS NULL"]
 			);
 		}
 		$this->set('customers', $this->Time->Customer->find('list'));
@@ -118,31 +128,21 @@ class TimesController extends AppController {
 			);
 		}
 
-		$statistics['Marco']['Time'] = $this->Time->statistics(1);
-		$statistics['Markus']['Time'] = $this->Time->statistics(2);
-		$statistics['Stefan']['Time'] = $this->Time->statistics(3);
-		$statistics['David']['Time'] = $this->Time->statistics(4);
-
-		$statistics['Marco']['Payment'] = $this->Payment->statistics(1);
-		$statistics['Markus']['Payment'] = $this->Payment->statistics(2);
-		$statistics['Stefan']['Payment'] = $this->Payment->statistics(3);
-		$statistics['David']['Payment'] = $this->Payment->statistics(4);
-
 		$this->set('projectstatistics', $this->Time->projectstatistics($customer));
 		$this->set('monthly_stats', $this->Time->monthly_stats($customer));
-
-		$this->set('statistics', $statistics);
 	}
 
-	public function start() {
+	public function start()
+	{
 		/* Check if entry already exists */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'")) {
+		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
 			return $this->flash('Du arbeitest doch schon', '/times/index');
 			exit();
 		}
 
 		$this->request->data['Time']['user_id'] = $this->userid;
 		$this->request->data['Time']['start'] = date('Y-m-d H:i:s');
+		$this->request->data['Time']['stop'] = null;
 		$this->request->data['Time']['break'] = 0;
 
 		if ($this->Time->save($this->request->data)) {
@@ -156,11 +156,12 @@ class TimesController extends AppController {
 		}
 	}
 
-	public function stop() {
+	public function stop()
+	{
 		$db_entry = $this->Time->find(
 			'first',
 			[
-				'conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'",
+				'conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL",
 				'fields' => ['id']
 			]
 		);
@@ -178,7 +179,8 @@ class TimesController extends AppController {
 		}
 	}
 
-	public function edit($id = null) {
+	public function edit($id = null)
+	{
 		if (empty($this->request->data)) {
 			if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
 				$this->Session->setFlash('Invalid id for Time', 'message_error');
@@ -216,7 +218,8 @@ class TimesController extends AppController {
 		$this->set('customers', $this->Time->Customer->find('list'));
 	}
 
-	public function delete($id = null) {
+	public function delete($id = null)
+	{
 		if (!$id || !$this->Time->hasAny("Time.id = $id AND Time.user_id = $this->userid")) {
 			$this->Session->setFlash('Invalid id for Time', 'message_error');
 			return $this->redirect('/times/index');
@@ -227,15 +230,16 @@ class TimesController extends AppController {
 		}
 	}
 
-	public function export($count = 100, $user = null) {
+	public function export($count = 100, $user = null)
+	{
 		$this->layout = 'plain';
 		$this->Time->recursive = 0;
 		/* Wenn schon gestartet, dann Werte in Stop-Formular ausgeben */
-		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'")) {
+		if ($this->Time->hasAny("Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL")) {
 			$this->set('startedTime', 1);
 			$this->request->data = $this->Time->find(
 				'first',
-				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop = '0000-00-00 00:00:00'"]
+				['conditions' => "Time.user_id = '" . $this->userid . "' AND Time.stop IS NULL"]
 			);
 		}
 		$this->set('customers', $this->Time->Customer->find('list'));
@@ -253,12 +257,11 @@ class TimesController extends AppController {
 
 	}
 
-	public function export_customer($customer) {
+	public function export_customer($customer)
+	{
 		$this->layout = 'plain';
 		$this->Time->recursive = 0;
 
 		$this->set('times', $this->Time->findAll("Customer.id = $customer", null, 'start DESC', intval($count)));
 	}
 }
-
-?>
